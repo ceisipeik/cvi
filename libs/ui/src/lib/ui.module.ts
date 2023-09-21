@@ -1,7 +1,7 @@
 import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
 import { CircleComponent } from './circle/circle.component';
-import {ToStepCircleSeverityPipe} from './steps/steps/to-step-circle-severity.pipe';
+import { ToStepCircleSeverityPipe } from './steps/steps/to-step-circle-severity.pipe';
 
 import { TrackComponent } from './track/track.component';
 import { ContentContainerComponent } from './content-container/content-container.component';

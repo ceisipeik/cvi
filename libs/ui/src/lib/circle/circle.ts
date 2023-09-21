@@ -1,6 +1,6 @@
-export type CircleTheme = 'light' | 'dark';
+export type CircleTheme = 'dark' | 'light';
 
-export type CircleSeverity = 'success' | 'error' | 'none' | 'info';
+export type CircleSeverity = 'none' | 'success' | 'error' | 'info';
 
 export type CircleThemeProperties = {
   '--border-color': string;
@@ -15,6 +15,7 @@ export type CircleThemePropertyGroup = {
 export type CircleSeverityProperties = {
   '--background-color': string;
   '--progress-background-color': string;
+  '--color'?: string;
 };
 
 export type CircleSeverityPropertyGroup = {
@@ -41,10 +42,19 @@ export const circleThemePropertyGroups: CircleThemePropertyGroup[] = [
 
 export const circleSeverityPropertyGroups: CircleSeverityPropertyGroup[] = [
   {
+    severity: 'none',
+    properties: {
+      // Note that literal, non CSS-variable-like values like this need special treatment in the component logic
+      '--background-color': 'transparent',
+      '--progress-background-color': '--cvi-color-white',
+    },
+  },
+  {
     severity: 'success',
     properties: {
       '--background-color': '--cvi-color-sea-green-10',
       '--progress-background-color': '--cvi-color-sea-green-10',
+      '--color': '--cvi-color-white',
     },
   },
   {
@@ -52,13 +62,7 @@ export const circleSeverityPropertyGroups: CircleSeverityPropertyGroup[] = [
     properties: {
       '--background-color': '--cvi-color-jasper-10',
       '--progress-background-color': '--cvi-color-jasper-10',
-    },
-  },
-  {
-    severity: 'none',
-    properties: {
-      '--background-color': 'transparent',
-      '--progress-background-color': '--cvi-color-white',
+      '--color': '--cvi-color-white',
     },
   },
   {
@@ -66,6 +70,7 @@ export const circleSeverityPropertyGroups: CircleSeverityPropertyGroup[] = [
     properties: {
       '--background-color': '--cvi-color-sapphire-blue-13',
       '--progress-background-color': '--cvi-color-sapphire-blue-13',
+      '--color': '--cvi-color-white',
     },
   },
 ];

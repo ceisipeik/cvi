@@ -12,6 +12,7 @@
   border-radius: 51%;
   border: $circle-border-width solid var(--cvi-circle-border-color, var(--border-color));
   color: var(--cvi-circle-color, var(--color));
+  fill: var(--cvi-circle-color, var(--color));
   background-color: var(--background-color);
   line-height: 0;
   aspect-ratio: 1;
@@ -20,11 +21,7 @@
   align-items: center;
 
   @at-root {
-    #{$base}__content-icon {
-      fill: var(--cvi-circle-color, var(--color));
-    }
-
-    #{$base}__size-s {
+    #{$base}--size-s {
       width: $circle-size-s;
       font-size: get-font-size(50);
 
@@ -33,7 +30,7 @@
       }
     }
 
-    #{$base}__size-m {
+    #{$base}--size-m {
       width: $circle-size-m;
       font-weight: get-font-weight(gamma);
 
@@ -42,9 +39,9 @@
       }
     }
 
-    #{$base}__with-progress {
+    #{$base}--with-progress {
       border: $circle-border-width solid transparent;
-      color: get-color(black-coral-10);
+      color: get-color(white);
       background-image: linear-gradient(
           var(--progress-background-color),
           var(--progress-background-color)),
@@ -53,6 +50,10 @@
           get-color(black-coral-2) var(--progress));
       background-origin: border-box;
       background-clip: content-box, border-box;
+
+      &#{$base}--severity-none {
+        color: get-color(black-coral-10);
+      }
 
       #{$base}__content-icon {
         fill: get-color(black-coral-10);

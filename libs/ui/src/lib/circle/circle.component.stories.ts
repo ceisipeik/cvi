@@ -6,21 +6,25 @@ import { storybookIconsNames } from '../icons/storybook-icons';
 
 export default {
   title: 'Angular/Circle',
-  parameters: { notes, layout: 'centered' },
+  component: CircleComponent,
+  parameters: {
+    notes,
+    layout: 'centered',
+    backgrounds: {
+      default: 'Gray',
+    },
+  },
   argTypes: {
     theme: {
       name: 'Theme',
-      options: ['light', 'dark'],
       control: { type: 'inline-radio' },
     },
     severity: {
       name: 'Severity',
-      options: ['success', 'error', 'info', 'none'],
-      control: { type: 'select' },
+      control: { type: 'inline-radio' },
     },
     size: {
       name: 'Size',
-      options: ['s', 'm'],
       control: { type: 'inline-radio' },
     },
     iconName: {
@@ -61,7 +65,9 @@ export const Default = Template.bind({});
 
 export const WithLightTheme = Template.bind({});
 WithLightTheme.parameters = {
-  backgrounds: { default: 'Gray' },
+  backgrounds: {
+    default: 'Dark',
+  },
 };
 WithLightTheme.args = {
   theme: 'light',

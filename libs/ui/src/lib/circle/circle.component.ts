@@ -22,17 +22,19 @@ import { CviIconName } from '@egov/cvi-icons';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class CircleComponent {
+  /** Only relevant when progressPercentage is undefined */
   @Input() theme: CircleTheme = 'light';
+
   @Input() severity: CircleSeverity = 'none';
   @Input() size: 'm' | 's' = 's';
   @Input() iconName?: CviIconName = undefined;
   @Input() progressPercentage?: number = undefined;
 
   @HostBinding('class') get hostClasses(): string {
-    return `cvi-circle cvi-circle__size-${this.size}`;
+    return `cvi-circle cvi-circle--size-${this.size} cvi-circle--severity-${this.severity}`;
   }
 
-  @HostBinding('class.cvi-circle__with-progress')
+  @HostBinding('class.cvi-circle--with-progress')
   get hostProgressClass(): boolean {
     return this.progressPercentage !== undefined;
   }
@@ -44,7 +46,9 @@ export class CircleComponent {
 
   @HostBinding('style.--color')
   get hostStyleColor(): string | null {
-    return this.getThemeProperty('--color');
+    return this.severity === 'none'
+      ? this.getThemeProperty('--color')
+      : this.getSeverityProperty('--color');
   }
 
   @HostBinding('style.--background-color')
@@ -77,9 +81,13 @@ export class CircleComponent {
       (group: CircleSeverityPropertyGroup) => group.severity === this.severity
     );
     if (item) {
-      return `var(${
-        item.properties[propName as keyof CircleSeverityProperties]
-      })`;
+      const cssValue =
+        item.properties[propName as keyof CircleSeverityProperties];
+      if (cssValue !== 'transparent') {
+        return `var(${cssValue})`;
+      } else {
+        return 'transparent';
+      }
     }
     return null;
   }
